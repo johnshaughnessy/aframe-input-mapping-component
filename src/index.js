@@ -202,11 +202,16 @@ AFRAME.registerSystem('input-mapping', {
 
   keyboardHandler: function (event) {
     this.checkValidInputMapping();
-    if (mappings && mappings.keyboard) {
-      mappings = mappings.keyboard;
-      var key = event.keyCode === 32 ? 'Space' : event.key;
-      var keyEvent = (key + '_' + event.type.substr(3)).toLowerCase();
-      var mapEvent = mappings[keyEvent];
+    if (mappings &&
+        mappings.mappings &&
+        mappings.mappings[AFRAME.currentInputMapping] &&
+        mappings.mappings[AFRAME.currentInputMapping].keyboard
+    ) {
+      var currentKeyboardMapping =
+            mappings.mappings[AFRAME.currentInputMapping].keyboard;
+      var key = event.keyCode === 32 ? "Space" : event.key;
+      var keyEvent = (key + "_" + event.type.substr(3)).toLowerCase();
+      var mapEvent = currentKeyboardMapping[keyEvent];
       if (mapEvent) {
         this.sceneEl.emit(mapEvent);
       }
