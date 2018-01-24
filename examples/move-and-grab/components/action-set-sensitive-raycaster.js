@@ -16,10 +16,10 @@ AFRAME.registerComponent("action-set-sensitive-raycaster", {
 
   onInputMappingChanged: function(evt) {
     if (evt.detail.curr == "moving_and_target_finding") {
-      this.el.setAttribute("raycaster");
-      this.el.setAttribute("raycaster", "recursive", "true");
-      this.el.setAttribute("raycaster", "showLine", "true");
-      this.el.setAttribute("raycaster", "objects", ".grabbable");
+      this.el.setAttribute(
+        "raycaster",
+        "recursive: true; showLine: true; objects: .grabbable"
+      );
       this.raycaster = this.el.components.raycaster;
     } else {
       this.el.removeAttribute("raycaster");
